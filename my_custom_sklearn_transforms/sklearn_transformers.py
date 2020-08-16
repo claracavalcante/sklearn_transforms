@@ -31,7 +31,7 @@ class SetIndex(BaseEstimator, TransformerMixin):
     
 class Balaceamento(BaseEstimator, TransformerMixin):
     def __init__(self):
-        return self
+        return None
     
     def fit(self):
         return self
