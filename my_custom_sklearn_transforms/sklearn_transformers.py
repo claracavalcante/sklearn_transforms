@@ -1,4 +1,5 @@
 from sklearn.base import BaseEstimator, TransformerMixin
+from imblearn.over_sampling import SMOTE
 
 
 # All sklearn Transforms must have the `transform` and `fit` methods
@@ -11,6 +12,36 @@ class DropColumns(BaseEstimator, TransformerMixin):
 
     def transform(self, X):
         # Primeiro realizamos a cópia do dataframe 'X' de entrada
-        data = X.copy().set_index(['MATRICULA'])
+        data = X.copy()
         # Retornamos um novo dataframe sem as colunas indesejadas
         return data.drop(labels=self.columns, axis='columns')
+    
+class SetIndex(BaseEstimator, TransformerMixin):
+    def __init__(self, columns):
+        self.columns = columns
+
+    def fit(self, X, y=None):
+        return self
+
+    def transform(self, X):
+        # Primeiro realizamos a cópia do dataframe 'X' de entrada
+        data = X.copy()
+        # Retornamos um novo dataframe sem as colunas indesejadas
+        return data.set_index(self.columns, inplace=True)
+    
+ class Balaceamento(BaseEstimator, TransformerMixin):
+    def __init__(self, X,y):
+        self.X = X
+        self.y = y
+
+    def fit(self, X, y):
+        return self
+
+    def transform(self, X, y):
+        from imblearn.over_sampling import SMOTE
+        smote = SMOTE(sampling_strategy='all')
+        # Primeiro realizamos a cópia do dataframe 'X' de entrada
+        novo_X,novo_y = smote.fit_resample(self.X,self.y)
+        # Retornamos um novo dataframe sem as colunas indesejadas
+        return novo_X,novo_y
+    
