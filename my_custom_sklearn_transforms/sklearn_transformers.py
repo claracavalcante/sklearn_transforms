@@ -29,7 +29,7 @@ class SetIndex(BaseEstimator, TransformerMixin):
         # Retornamos um novo dataframe sem as colunas indesejadas
         return data.set_index(self.columns, inplace=True)
     
- class Balaceamento(BaseEstimator, TransformerMixin):
+class Balaceamento(BaseEstimator, TransformerMixin):
     def __init__(self, X,y):
         self.X = X
         self.y = y
