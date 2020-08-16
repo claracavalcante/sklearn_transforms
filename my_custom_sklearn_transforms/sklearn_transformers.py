@@ -30,18 +30,17 @@ class SetIndex(BaseEstimator, TransformerMixin):
         return data.set_index(self.columns, inplace=True)
     
 class Balaceamento(BaseEstimator, TransformerMixin):
-    def __init__(self, X,y):
-        self.X = X
-        self.y = y
+    def __init__(self):
 
-    def fit(self, X, y):
+
+    def fit(self):
         return self
 
     def transform(self, X, y):
         from imblearn.over_sampling import SMOTE
         smote = SMOTE(sampling_strategy='all')
         # Primeiro realizamos a cópia do dataframe 'X' de entrada
-        novo_X,novo_y = smote.fit_resample(self.X,self.y)
+        novo_X,novo_y = smote.fit_resample(X,y)
         # Retornamos um novo dataframe sem as colunas indesejadas
         return novo_X,novo_y
     
