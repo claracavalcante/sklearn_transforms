@@ -32,8 +32,10 @@ class SetIndex(BaseEstimator, TransformerMixin):
         return data.set_index(self.columns, inplace=True)
     
 class Balanceamento(BaseEstimator, TransformerMixin):
-    def __init__(self):
-        pass
+    def __init__(self, X, y):
+        self.X = X
+        self.y = y
+        
     
     def fit(self, X, y):
         return self
