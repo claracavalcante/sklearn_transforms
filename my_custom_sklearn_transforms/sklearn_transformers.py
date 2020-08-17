@@ -34,6 +34,9 @@ class Balanceamento(BaseEstimator, TransformerMixin):
         self.y = y
     
     def fit(self, X, y):
+        from imblearn.over_sampling import SMOTE
+        smote = SMOTE(sampling_strategy='all')
+        self.X, self.y = smote.fit(X,y)
         return self.X, self.y
 
     def transform(self, X, y):
