@@ -1,6 +1,5 @@
 from sklearn.base import BaseEstimator, TransformerMixin
 from imblearn.over_sampling import SMOTE
-from imblearn.over_sampling import SMOTE
 smote = SMOTE(sampling_strategy='all')
 
 
@@ -41,6 +40,8 @@ class Balanceamento(BaseEstimator, TransformerMixin):
         return self
 
     def transform(self, X, y):
+        from imblearn.over_sampling import SMOTE
+        smote = SMOTE(sampling_strategy='all')
         # Primeiro realizamos a cópia do dataframe 'X' de entrada
         self.X, self.y = smote.fit_resample(X,y)
         # Retornamos um novo dataframe sem as colunas indesejadas
