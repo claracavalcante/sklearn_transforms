@@ -37,6 +37,5 @@ class SmoteResample(object):
 
     def fit(self, X, y):
         X_resampled, y_resampled = SMOTE().fit_resample(X, y)
-        X_resampled = DataFrame(X_resampled, columns=X.columns)
         return X_resampled, y_resampled
     
