@@ -1,7 +1,6 @@
 from sklearn.base import BaseEstimator, TransformerMixin
 from imblearn.over_sampling import SMOTE
 import pandas as pd
-from pandas import DataFrame
 
 # All sklearn Transforms must have the `transform` and `fit` methods
 class DropColumns(BaseEstimator, TransformerMixin):
@@ -37,5 +36,6 @@ class SmoteResample(object):
 
     def fit(self, X, y):
         X_resampled, y_resampled = SMOTE().fit_resample(X, y)
+        X_resampled = pd.DataFrame(X_resampled, columns=X.columns)
         return X_resampled, y_resampled
     
