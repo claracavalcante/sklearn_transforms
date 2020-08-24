@@ -17,29 +17,15 @@ class DropColumns(BaseEstimator, TransformerMixin):
         # Retornamos um novo dataframe sem as colunas indesejadas
         return data.drop(labels=self.columns, axis='columns')
     
-class SetIndex(BaseEstimator, TransformerMixin):
+    
+class EncodeCategorical(BaseEstimator, TransformerMixin):
     def __init__(self, columns):
         self.columns = columns
 
     def fit(self, X, y=None):
         return self
-
-    def transform(self, X):
-        # Primeiro realizamos a cópia do dataframe 'X' de entrada
-        data = X.copy()
-        # Retornamos um novo dataframe sem as colunas indesejadas
-        return data.set_index(self.columns, inplace=True)
     
-   
-class SmoteResample(object):
-    def __init__(self):
-        pass
-
-    def fit(self, X, y=None):
-        return self
-    
-    def transform(self, X, y):
-        X_resampled, y_resampled = SMOTE().fit_resample(X, y)
-        X_resampled = pd.DataFrame(X_resampled, columns=X.columns)
-        return X_resampled, y_resampled
+    def transform(self, X_train, X_test):
+        o_encoder = OrdinalEncoder()
+        return (o_encoder.fit_transform(X_train), o_encoder.fit_transform(X_test))
     
