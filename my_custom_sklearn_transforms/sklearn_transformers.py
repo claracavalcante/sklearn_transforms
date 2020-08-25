@@ -23,4 +23,4 @@ class EncodeCategorical(BaseEstimator, TransformerMixin):
     
     def transform(self, X):
         o_encoder = OrdinalEncoder()
-        return o_encoder.fit_transform(X)
+        return o_encoder.fit_transform(X[0]), o_encoder.fit_transform(X[1]) 
